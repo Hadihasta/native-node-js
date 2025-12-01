@@ -1,4 +1,4 @@
-// app.ccaconst express = require("express");
+
 
 const cors = require("cors");
 const express = require('express');
@@ -10,25 +10,10 @@ app.use(express.json());            // Parse incoming JSON requests
 app.use(express.urlencoded({ extended: false }));  // Parse URL-encoded data
 app.use(cors());                    // Enable CORS for cross-origin requests
 
+const  userRoutes = require('./routes/users')
 
-const userRouter = require('./routes/users');
-// Use the routers
-app.use('/users', userRouter);
+app.use('/', userRoutes);
 
-
-app.get('/', (req, res) => {
-  res.send('hello world');
-});
-
-// Respond to POST request on the root route
-app.post('/', (req, res) => {
-  res.send('POST request to the homepage');
-});
-
-// Respond to GET request on the /about route
-app.get('/about', (req, res) => {
-  res.send('About page');
-});
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
